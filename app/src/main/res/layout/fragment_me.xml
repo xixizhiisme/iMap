@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MeFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <TextView
+        android:id="@+id/meTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/me_label"
+        android:textSize="90sp" />
+
+    <TextView
+        android:id="@+id/me_money"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/background_light"
+        android:gravity="left"
+        android:text="@string/me_money"
+        android:textColor="@android:color/holo_blue_bright"
+        android:textSize="36dp" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@android:color/darker_gray"
+        android:textColor="@android:color/darker_gray" />
+
+    <TextView
+        android:id="@+id/me_photo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/background_light"
+        android:gravity="left"
+        android:text="@string/me_photo"
+        android:textColor="@android:color/holo_blue_bright"
+        android:textSize="36dp" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@android:color/darker_gray"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/me_card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/background_light"
+        android:gravity="left"
+        android:text="@string/me_card"
+        android:textColor="@android:color/holo_blue_bright"
+        android:textSize="36dp" />
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@android:color/darker_gray"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/me_setting"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/background_light"
+        android:gravity="left"
+        android:text="@string/me_setting"
+        android:textColor="@android:color/holo_blue_bright"
+        android:textSize="36dp" />
+
+</LinearLayout>

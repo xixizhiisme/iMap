@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">iMap</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="map_label">地图</string>
+    <string name="func_label">功能</string>
+    <string name="me_label">我</string>
+    <string name="title_nearby">这是附近页面</string>
+    <string name="title_func">这是功能页面</string>
+    <string name="title_me">这是我页面</string>
+    <string name="me_setting">设置</string>
+    <string name="me_money">钱包</string>
+    <string name="me_photo">相册</string>
+    <string name="me_card">卡包</string>
+    <string name="label_first">first fragment</string>
+    <string name="label_second">second fragment</string>
+    <string name="label_third">third fragment</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
