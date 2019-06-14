@@ -29,12 +29,12 @@ public class FuncFragment extends Fragment {
         // Inflate the layout for this fragment
         SDKInitializer.initialize(getActivity().getApplicationContext());
         View rootView= inflater.inflate(R.layout.fragment_func, container, false);
-        /*ViewPager viewPager=rootView.findViewById(R.id.viewpager);
-        MyPageAdapter pageAdapter=new MyPageAdapter(getSupportFragmentManager());
+        ViewPager viewPager=rootView.findViewById(R.id.viewpager);
+        MyPageAdapter pageAdapter=new MyPageAdapter(getFragmentManager());
         viewPager.setAdapter(pageAdapter);
 
         TabLayout tabLayout=rootView.findViewById(R.id.sliding_tabs);
-        tabLayout.setupWithViewPager(viewPager);*/
+        tabLayout.setupWithViewPager(viewPager);
         return rootView;
     }
 

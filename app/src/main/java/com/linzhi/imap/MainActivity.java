@@ -26,12 +26,25 @@ public class MainActivity extends AppCompatActivity {
             switch (item.getItemId()) {
                 case R.id.navigation_map:
                     fragmentTransaction.show(mFragments[0]).commit();
-                    return true;
+                    break;
                 case R.id.navigation_func:
                     fragmentTransaction.show(mFragments[1]).commit();
-                    return true;
+                    break;
                 case R.id.navigation_me:
                     fragmentTransaction.show(mFragments[2]).commit();
+                    break;
+                default:
+                    break;
+            }
+            switch (item.getItemId()){
+                case R.id.navigation_map:
+                    mTextMessage.setText("");
+                    return true;
+                case R.id.navigation_func:
+                    mTextMessage.setText("");
+                    return true;
+                case R.id.navigation_me:
+                    mTextMessage.setText("");
                     return true;
             }
             return false;

@@ -17,4 +17,9 @@
         <item name="tabSelectedTextColor">?android:textColorPrimaryDisableOnly</item>
     </style>
 
+    <style name="NoTitle" parent="Theme.AppCompat.DayNight.DarkActionBar">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowFullscreen">true</item>
+    </style>
+
 </resources>
