@@ -23,6 +23,11 @@
     <string name="add_score2">+2 分</string>
     <string name="add_score1">+1 分</string>
     <string name="reset">重置</string>
+    <string name="rate_dollar">美元</string>
+    <string name="rate_euro">欧元</string>
+    <string name="rate_won">韩元</string>
+    <string name="rmb_hint">请输入人民币金额</string>
+    <string name="btn_config">显示更多……</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
