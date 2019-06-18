@@ -71,6 +71,22 @@ public class MeFragment extends Fragment {
                 startActivity(intent);
             }
         });
+        Button button5=getActivity().findViewById(R.id.me_login);
+        button5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(getActivity().getApplicationContext(),LoginActivity.class);
+                startActivity(intent);
+            }
+        });
+        Button button6=getActivity().findViewById(R.id.me_register);
+        button6.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(getActivity().getApplicationContext(),RegisterActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
 }

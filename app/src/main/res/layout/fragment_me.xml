@@ -8,12 +8,39 @@
     tools:context=".MeFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <ImageView
-        android:id="@+id/meTextView"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:src="@drawable/jing"
-        android:layout_marginRight="230dp"/>
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/me_register"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="200dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginRight="20dp"
+            android:background="@android:color/background_light"
+            android:text="注册" />
+
+        <Button
+            android:id="@+id/me_login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/me_register"
+            android:layout_marginLeft="200dp"
+            android:layout_marginTop="14dp"
+            android:layout_marginRight="20dp"
+            android:background="@android:color/background_light"
+            android:text="登录" />
+
+        <ImageView
+            android:id="@+id/meTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="230dp"
+            android:src="@drawable/jing" />
+    </RelativeLayout>
 
     <Button
         android:id="@+id/me_money"

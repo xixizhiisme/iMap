@@ -59,8 +59,10 @@
         <activity android:name=".MePhotoActivity" />
         <activity android:name=".MeCardActivity" />
         <activity android:name=".MeSettingActivity" />
-        <activity android:name=".MyList2Activity"/>
-        <activity android:name=".RateCalActivity"/>
+        <activity android:name=".MyList2Activity" />
+        <activity android:name=".RateCalActivity" />
+        <activity android:name=".LoginActivity" />
+        <activity android:name=".RegisterActivity"></activity>
     </application>
 
 </manifest>
