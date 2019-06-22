@@ -4,14 +4,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginBottom="45dp"
+    android:background="@drawable/money"
     tools:context=".ThirdFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <LinearLayout
+        android:id="@+id/activity_rate"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="30dp"
-        android:id="@+id/activity_rate"
         android:orientation="vertical">
 
         <EditText
@@ -20,23 +21,23 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:hint="@string/rmb_hint"
-            android:inputType="numberDecimal"/>
+            android:inputType="numberDecimal" />
 
         <TextView
             android:id="@+id/showOut"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="35sp"
+            android:gravity="center"
             android:text="汇率计算"
-            android:gravity="center"/>
+            android:textSize="35sp" />
 
         <Button
             android:id="@+id/rate_dollar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:background="@android:color/holo_green_light"
             android:gravity="center"
-            android:layout_marginTop="10dp"
             android:text="@string/rate_dollar"
             android:textSize="20dp" />
 
@@ -44,8 +45,8 @@
             android:id="@+id/rate_euro"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@android:color/holo_orange_dark"
             android:layout_marginTop="10dp"
+            android:background="@android:color/holo_orange_dark"
             android:gravity="center"
             android:text="@string/rate_euro"
             android:textSize="20dp" />
@@ -54,8 +55,8 @@
             android:id="@+id/rate_won"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@android:color/holo_orange_light"
             android:layout_marginTop="10dp"
+            android:background="@android:color/holo_orange_light"
             android:gravity="center"
             android:text="@string/rate_won"
             android:textSize="20dp" />

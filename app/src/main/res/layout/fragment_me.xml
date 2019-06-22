@@ -4,6 +4,7 @@
     android:id="@+id/me_lin"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/back2"
     android:orientation="vertical"
     tools:context=".MeFragment">
 
@@ -11,28 +12,6 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-
-        <Button
-            android:id="@+id/me_register"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_marginLeft="200dp"
-            android:layout_marginTop="12dp"
-            android:layout_marginRight="20dp"
-            android:background="@android:color/background_light"
-            android:text="注册" />
-
-        <Button
-            android:id="@+id/me_login"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/me_register"
-            android:layout_marginLeft="200dp"
-            android:layout_marginTop="14dp"
-            android:layout_marginRight="20dp"
-            android:background="@android:color/background_light"
-            android:text="登录" />
 
         <ImageView
             android:id="@+id/meTextView"
@@ -48,8 +27,8 @@
         android:layout_height="wrap_content"
         android:background="@android:color/background_light"
         android:gravity="left"
-        android:text="@string/me_money"
         android:paddingTop="1dp"
+        android:text="@string/me_money"
         android:textColor="@android:color/black"
         android:textSize="36dp" />
 
