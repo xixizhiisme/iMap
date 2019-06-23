@@ -1,64 +1,35 @@
 package com.linzhi.imap;
 
 
-import android.content.Context;
-import android.hardware.SensorManager;
+import android.Manifest;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
-import android.widget.Toast;
-
-import com.baidu.location.BDAbstractLocationListener;
-import com.baidu.location.BDLocation;
-import com.baidu.location.BDLocationListener;
-import com.baidu.location.LocationClient;
-import com.baidu.location.LocationClientOption;
-import com.baidu.location.Poi;
+import android.widget.Button;
 import com.baidu.mapapi.SDKInitializer;
-
 import com.baidu.mapapi.map.BaiduMap;
-import com.baidu.mapapi.map.BitmapDescriptor;
-import com.baidu.mapapi.map.BitmapDescriptorFactory;
-import com.baidu.mapapi.map.MapStatus;
 import com.baidu.mapapi.map.MapStatusUpdate;
 import com.baidu.mapapi.map.MapStatusUpdateFactory;
 import com.baidu.mapapi.map.MapView;
-import com.baidu.mapapi.map.MyLocationConfiguration;
-import com.baidu.mapapi.map.MyLocationData;
 import com.baidu.mapapi.model.LatLng;
-
-
-import java.util.List;
-
-import static android.content.Context.SENSOR_SERVICE;
-import static android.support.v4.content.ContextCompat.getSystemService;
 
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class MapFragment extends Fragment implements BDLocationListener{
+public class MapFragment extends Fragment {
     private MapView mapView=null;
-    private BaiduMap mBaiduMap = null;
-    private Context context;
-    private double mLatitude;
-    private double mLongtitude;
-    private BitmapDescriptor mIconLocation;
-    private LocationClient mLocationClient;
-    private boolean isFirstin = true;
-    BitmapDescriptor mCurrentMarker;
-    boolean isFirstLoc = true;
-
-
+    private BaiduMap baiduMap;
+    private static final int PERMISSION_REQUEST_COARSE_LOCATION = 1;
+    protected LatLng target=new LatLng(30.689362,103.822179);
     public MapFragment() {
         // Required empty public constructor
     }
-
 
     @Override
     @NonNull
@@ -68,25 +39,49 @@ public class MapFragment extends Fragment implements BDLocationListener{
         SDKInitializer.initialize(getActivity().getApplicationContext());
         View rootView= inflater.inflate(R.layout.fragment_map, container, false);
         mapView=rootView.findViewById(R.id.mapTextView);
-        mBaiduMap = mapView.getMap();
-// 开启定位图层
-        mBaiduMap.setMyLocationEnabled(true);
-        //定位初始化
-        mLocationClient = new LocationClient(getActivity().getApplicationContext());
-//通过LocationClientOption设置LocationClient相关参数
-        LocationClientOption option = new LocationClientOption();
-        option.setOpenGps(true); // 打开gps
-        option.setCoorType("bd09ll"); // 设置坐标类型
-        option.setScanSpan(10);
-//设置locationClientOption
-        mLocationClient.setLocOption(option);
-//注册LocationListener监听器
-        MyLocationListener myLocationListener = new MyLocationListener();
-        mLocationClient.registerLocationListener(myLocationListener);
-//开启地图定位图层
-        mLocationClient.start();
+        baiduMap=mapView.getMap();//获取地图控制器
+        MapStatusUpdate mapStatusUpdate= MapStatusUpdateFactory.newLatLng(target);
+        baiduMap.setMapStatus(mapStatusUpdate);
+        mapStatusUpdate= MapStatusUpdateFactory.zoomTo(16);
+        baiduMap.setMapStatus(mapStatusUpdate);
+        Button btn_start_location = rootView.findViewById(R.id.location);
+        btn_start_location.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                BDLocationUtils bdLocationUtils = new BDLocationUtils(getActivity());
+                bdLocationUtils.doLocation();//开启定位
+                bdLocationUtils.mLocationClient.start();//开始定位
+            }
+        });
+            /*onRquestPermissionsResult及以下if判断语句引用自
+            作者：iOnesmile
+            来源：CSDN
+            原文：https://blog.csdn.net/u010134293/article/details/52808832
+            用于解决Android6.0及以上版本手机上扫描不到蓝牙设备并抛出异常的问题*/
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            // Android M Permission check
+            if (getActivity().checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                requestPermissions(new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, PERMISSION_REQUEST_COARSE_LOCATION);
+            }
+        }
+        /*SensorManager mSensorManager = (SensorManager) getActivity().getSystemService(SENSOR_SERVICE);//获取传感器管理服务
+        MyLocationConfiguration.LocationMode mCurrentMode = MyLocationConfiguration.LocationMode.NORMAL;//地图显示模式:普通
+        mCurrentMarker = null;//null为默认
+        mCurrentMarker = BitmapDescriptorFactory.fromResource(R.drawable.location);//自定义显示定位图标*/
         return rootView;
     }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case PERMISSION_REQUEST_COARSE_LOCATION:
+                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    // TODO request success
+                }
+                break;
+        }
+    }
+
     @Override
     public void onResume(){
         super.onResume();
@@ -99,69 +94,7 @@ public class MapFragment extends Fragment implements BDLocationListener{
     }
     @Override
     public void onDestroy() {
-        mLocationClient.stop();
-        mBaiduMap.setMyLocationEnabled(false);
         mapView.onDestroy();
-        mapView = null;
         super.onDestroy();
-    }
-
-    @Override
-    public void onReceiveLocation(BDLocation bdLocation) {
-        SensorManager mSensorManager = (SensorManager) getActivity().getSystemService(SENSOR_SERVICE);//获取传感器管理服务
-        MyLocationConfiguration.LocationMode mCurrentMode = MyLocationConfiguration.LocationMode.NORMAL;//地图显示模式:普通
-        mCurrentMarker = null;//null为默认
-        mCurrentMarker = BitmapDescriptorFactory.fromResource(R.drawable.location);//自定义显示定位图标
-    }
-
-    public class MyLocationListener extends BDAbstractLocationListener{
-        @Override
-        public void onReceiveLocation(BDLocation location){
-            //mapView 销毁后不在处理新接收的位置
-            if (location == null || mapView == null){
-                return;
-            }
-            MyLocationData locData = new MyLocationData.Builder()
-                    .accuracy(location.getRadius())
-                    // 此处设置开发者获取到的方向信息，顺时针0-360
-                    .direction(location.getDirection()).latitude(location.getLatitude())
-                    .longitude(location.getLongitude()).build();
-            mBaiduMap.setMyLocationData(locData);
-            MyLocationConfiguration config = new
-                    MyLocationConfiguration(
-                    MyLocationConfiguration.LocationMode.NORMAL, true, mIconLocation);
-            mBaiduMap.setMyLocationConfiguration(config);
-            mLatitude = location.getLatitude();
-            mLongtitude = location.getLongitude();
-            //设置起点
-            LatLng mLastLocationData = new LatLng(mLatitude, mLongtitude);
-            if (isFirstLoc) {
-                isFirstLoc = false;
-                LatLng ll = new LatLng(location.getLatitude(),
-                        location.getLongitude());
-                MapStatus.Builder builder = new MapStatus.Builder();
-                builder.target(ll).zoom(18.0f);
-                mBaiduMap.animateMapStatus(MapStatusUpdateFactory.newMapStatus(builder.build()));
-            }
-            if (isFirstin) {
-                if (location.getLocType() == BDLocation.TypeGpsLocation) {
-                    // GPS定位结果
-                    Toast.makeText(context, "定位:"+location.getAddrStr(), Toast.LENGTH_SHORT).show();
-                } else if (location.getLocType() == BDLocation.TypeNetWorkLocation) {
-                    // 网络定位结果
-                    Toast.makeText(context, "定位:"+location.getAddrStr(), Toast.LENGTH_SHORT).show();
-                } else if (location.getLocType() == BDLocation.TypeOffLineLocation) {
-                    // 离线定位结果
-                    Toast.makeText(context, "定位:"+location.getAddrStr(), Toast.LENGTH_SHORT).show();
-                } else if (location.getLocType() == BDLocation.TypeServerError) {
-                    Toast.makeText(context, "定位:服务器错误", Toast.LENGTH_SHORT).show();
-                } else if (location.getLocType() == BDLocation.TypeNetWorkException) {
-                    Toast.makeText(context, "定位:网络错误", Toast.LENGTH_SHORT).show();
-                } else if (location.getLocType() == BDLocation.TypeCriteriaException) {
-                    Toast.makeText(context, "定位:手机模式错误，请检查是否飞行", Toast.LENGTH_SHORT).show();
-                }
-                isFirstin = false;
-            }
-        }
     }
 }
